@@ -1,0 +1,45 @@
+# .github/workflows/imagen.yml
+# Integración continua para un servicio en contenedor: en cada Pull Request,
+# GitHub corre las pruebas, construye la imagen y la arranca para comprobar que
+# responde. Si cualquiera de las tres cosas falla, el PR queda en rojo.
+#
+# Comparar con el flujo del Taller 3: allá solo se corría pytest. Aquí, además,
+# se verifica que lo que se va a desplegar es exactamente lo que se probó.
+name: Imagen del servicio
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  pruebas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -e ".[http,parquet,dev]"
+      - run: pytest -q
+
+  imagen:
+    needs: pruebas
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Construir la imagen
+        run: docker build -t limpieza:${{ github.sha }} .
+      - name: Arrancarla y comprobar que responde
+        run: |
+          docker run -d --rm --name prueba -p 8002:8002 limpieza:${{ github.sha }}
+          for i in $(seq 1 15); do
+            if curl -fs http://localhost:8002/salud; then exit 0; fi
+            sleep 2
+          done
+          echo "El servicio no respondió a tiempo"
+          docker logs prueba
+          exit 1
+      - name: Detener
+        if: always()
+        run: docker stop prueba || true

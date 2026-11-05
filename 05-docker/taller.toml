@@ -1,0 +1,4 @@
+titulo = "Taller 5. Docker: el mismo proceso, en cualquier máquina"
+subtitulo = "Empaquetar el servicio, el pipeline y el muñeco completo en contenedores, para que corran igual en tu computador, en el de un compañero y en un servidor. Guía completa, módulos 0 a 4"
+fecha = "Noviembre de 2026"
+nombre_archivo = "Taller_5_Docker"

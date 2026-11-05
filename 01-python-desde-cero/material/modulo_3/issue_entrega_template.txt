@@ -1,0 +1,54 @@
+==================================================================
+PLANTILLA DEL ISSUE DE ENTREGA — MÓDULO 3
+==================================================================
+
+Cuando termines el Módulo 3, debes crear un Issue en TU PROPIO REPO
+de GitHub con el siguiente contenido. Esto activa la revisión.
+
+DÓNDE:
+  github.com/<tu-usuario>/taller-python-<tu-nombre>/issues/new
+
+TÍTULO SUGERIDO:
+  Entrega Módulo 3 — Taller de Python
+
+CUERPO SUGERIDO (copia, pega, completa los datos entre corchetes):
+
+------------------------------------------------------------------
+
+Hola @OmarCorrea26,
+
+Te dejo mi entrega del Módulo 3 del taller. El repo está listo para
+tu revisión.
+
+**Datos del entregable:**
+- Nombre: [Tu nombre completo]
+- URL del repo: https://github.com/[tu-usuario]/taller-python-[tu-nombre]
+- Última actividad (commit): [fecha del último commit]
+
+**Qué incluí:**
+- [x] Módulo 0 — entorno configurado
+- [x] Módulo 1 — scripts iniciales (hola.py, generar_datos.py, analisis.py)
+- [x] Módulo 2 — análisis migrado a funciones (analisis_v2.py)
+- [x] Módulo 3 — repo público, .gitignore, README.md
+
+**Notas / preguntas:**
+[Si tienes alguna duda específica o quieres feedback en algo en
+particular, escríbelo aquí. Si no, déjalo en blanco.]
+
+Quedo atento al feedback antes del siguiente sprint.
+
+Gracias.
+
+------------------------------------------------------------------
+
+DESPUÉS DE CREARLO:
+
+1. Verifica que @OmarCorrea26 aparece resaltado en azul (eso significa
+   que la mención funcionó y GitHub me notifica automáticamente).
+2. No cierres el Issue. Yo voy a comentarlo con feedback y, cuando
+   esté listo, lo voy a cerrar yo o te voy a pedir que lo cierres
+   después de los ajustes.
+3. Si te pido ajustes, hazlos, haz commit + push, y comenta en el
+   mismo Issue diciendo "Listo, ajustes aplicados".
+
+==================================================================

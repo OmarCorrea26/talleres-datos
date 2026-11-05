@@ -1,0 +1,7 @@
+kedro~=1.7.0
+kedro-viz
+kedro-datasets[pandas-csvdataset,pandas-parquetdataset,pandas-exceldataset,json-jsondataset]
+pandas
+openpyxl
+pyarrow
+pytest

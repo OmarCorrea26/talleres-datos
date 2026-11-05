@@ -1,0 +1,4 @@
+titulo = "Taller 2. De scripts sueltos a pipelines reproducibles con Kedro"
+subtitulo = "La encuesta de hogares que empezó como un script y termina como un proceso que cualquiera puede correr, revisar y mantener. Guía completa, módulos 0 a 4"
+fecha = "Noviembre de 2026"
+nombre_archivo = "Taller_2_Orquestacion_con_Kedro"

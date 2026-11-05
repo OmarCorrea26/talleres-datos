@@ -1,0 +1,87 @@
+# Catálogo de datos del proyecto encuesta_hogares.
+#
+# Cada entrada es un dataset con nombre. Los nodos reciben y devuelven
+# DataFrames; Kedro se encarga de leerlos y escribirlos en la ruta indicada.
+# Los datasets que no aparecen aquí viven solo en memoria durante la corrida.
+
+# --- Capa 01_raw: lo que llega, tal como llega ------------------------------
+encuesta_cruda:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/encuesta_hogares.csv
+
+# --- Capa 02_intermediate: pasos de preparación -----------------------------
+encuesta_validada:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/encuesta_validada.parquet
+
+encuesta_limpia:
+  type: pandas.ParquetDataset
+  filepath: data/02_intermediate/encuesta_limpia.parquet
+
+# --- Capa 03_primary: la base lista para estimar ----------------------------
+encuesta_calibrada:
+  type: pandas.ParquetDataset
+  filepath: data/03_primary/encuesta_calibrada.parquet
+
+# --- Capa 07_model_output: resultados numéricos -----------------------------
+indicadores:
+  type: pandas.CSVDataset
+  filepath: data/07_model_output/indicadores.csv
+  save_args:
+    index: false
+
+indicadores_con_precision:
+  type: pandas.CSVDataset
+  filepath: data/07_model_output/indicadores_con_precision.csv
+  save_args:
+    index: false
+
+# --- Capa 08_reporting: lo que se publica -----------------------------------
+tabulados:
+  type: pandas.ExcelDataset
+  filepath: data/08_reporting/tabulados.xlsx
+  save_args:
+    sheet_name: tabulados
+    index: false
+
+metadatos:
+  type: json.JSONDataset
+  filepath: data/08_reporting/metadatos.json
+  save_args:
+    indent: 2
+    ensure_ascii: false
+  fs_args:
+    open_args_save:
+      encoding: utf-8
+
+# --- Dataset factory: un patrón que cubre varios datasets -------------------
+# Cualquier salida llamada resumen_<algo> se guarda como JSON en 02_intermediate
+# sin necesidad de declararla una por una. Ver Módulo 2, sección 2.4.
+"resumen_{etapa}":
+  type: json.JSONDataset
+  filepath: data/02_intermediate/resumen_{etapa}.json
+  save_args:
+    indent: 2
+    ensure_ascii: false
+  fs_args:
+    open_args_save:
+      encoding: utf-8
+
+# Las salidas de un pipeline con namespace llegan con prefijo: rural.tabulados,
+# rural.metadatos. Este patrón las guarda en su propia carpeta.
+"{namespace}.tabulados":
+  type: pandas.ExcelDataset
+  filepath: data/08_reporting/{namespace}/tabulados.xlsx
+  save_args:
+    sheet_name: tabulados
+    index: false
+
+"{namespace}.metadatos":
+  type: json.JSONDataset
+  filepath: data/08_reporting/{namespace}/metadatos.json
+  save_args:
+    indent: 2
+    ensure_ascii: false
+  fs_args:
+    open_args_save:
+      encoding: utf-8

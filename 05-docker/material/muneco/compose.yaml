@@ -1,0 +1,60 @@
+# El muñeco completo con un solo comando:  docker compose up --build
+# Abrir http://localhost:8000. Detener con Ctrl + C y limpiar con docker compose down.
+#
+# Siete servicios. Seis usan la misma imagen con comandos distintos; la etapa 2
+# usa la imagen del servicio de limpieza del Taller 4, que vive en otra carpeta.
+# Dentro de la red de compose cada servicio se encuentra por su nombre:
+# el ensamblador llama a http://etapa_3:8003 y Docker resuelve el nombre.
+
+services:
+  ensamblador:
+    build: .
+    image: muneco:1.0
+    ports:
+      - "8000:8000"
+    environment:
+      ETAPA_1_URL: http://etapa_1:8001
+      ETAPA_2_URL: http://etapa_2:8002
+      ETAPA_3_URL: http://etapa_3:8003
+      ETAPA_4_URL: http://etapa_4:8004
+      ETAPA_5_URL: http://etapa_5:8005
+      ETAPA_6_URL: http://etapa_6:8006
+    depends_on:
+      - etapa_1
+      - etapa_2
+      - etapa_3
+      - etapa_4
+      - etapa_5
+      - etapa_6
+    volumes:
+      # encadenar deja aquí el resultado final cuando se corre dentro del contenedor
+      - ./salida:/app/salida
+
+  etapa_1:
+    image: muneco:1.0
+    command: uvicorn etapas.etapa_1_validar.app:app --host 0.0.0.0 --port 8001
+
+  # La etapa 2 no sale de esta imagen: es el contenedor del Taller 4.
+  # Mismo contrato, otro repositorio, otra imagen. El ensamblador no lo nota.
+  etapa_2:
+    build: ../servicio-limpieza
+    image: limpieza:1.0
+
+  etapa_3:
+    image: muneco:1.0
+    command: uvicorn etapas.etapa_3_calibrar.app:app --host 0.0.0.0 --port 8003
+
+  etapa_4:
+    image: muneco:1.0
+    command: uvicorn etapas.etapa_4_indicadores.app:app --host 0.0.0.0 --port 8004
+
+  etapa_5:
+    image: muneco:1.0
+    command: uvicorn etapas.etapa_5_precision.app:app --host 0.0.0.0 --port 8005
+
+  etapa_6:
+    image: muneco:1.0
+    command: uvicorn etapas.etapa_6_publicar.app:app --host 0.0.0.0 --port 8006
+    volumes:
+      # El Excel que publica la etapa 6 queda en tu máquina, no dentro del contenedor
+      - ./salida:/app/salida

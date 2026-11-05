@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "limpieza"
+version = "1.0.0"
+description = "Etapa de limpieza de la encuesta de hogares, con el dominio separado de sus adaptadores"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas>=2.0",
+]
+
+[project.optional-dependencies]
+http = ["fastapi>=0.110", "uvicorn>=0.27", "httpx>=0.27"]
+parquet = ["pyarrow>=15"]
+dev = ["pytest>=8"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning"]

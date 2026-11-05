@@ -1,0 +1,7 @@
+# Solo lo necesario para `kedro run` dentro del contenedor.
+# Compara con requirements.txt: aquí no hay kedro-viz, ipython ni pytest.
+kedro~=1.7.0
+kedro-datasets[pandas-csvdataset,pandas-parquetdataset,pandas-exceldataset,json-jsondataset]
+pandas
+openpyxl
+pyarrow

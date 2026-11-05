@@ -1,0 +1,15 @@
+# Parámetros del pipeline de estimación.
+
+estimacion:
+  # La ocupación solo se pregunta a personas de esta edad en adelante
+  edad_minima_ocupacion: 15
+  # Nivel de confianza de los intervalos
+  nivel_confianza: 0.95
+
+# Clasificación de calidad según el coeficiente de variación (en %)
+umbrales_cv:
+  buena: 7.5
+  aceptable: 15.0
+
+# Área que usa el pipeline estimacion_rural (ver Módulo 2, sección 2.9)
+area_de_interes: Rural

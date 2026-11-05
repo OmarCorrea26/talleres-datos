@@ -1,0 +1,17 @@
+# Parámetros del pipeline de preparación.
+# Son decisiones metodológicas, no datos: por eso viven en conf/ y no en data/.
+
+limpieza:
+  # Todo ingreso por encima de este percentil se recorta a ese valor (winsorización)
+  percentil_atipicos: 0.99
+  # Los ocupados sin ingreso reciben la mediana de su grupo
+  grupos_imputacion: ["area", "sexo"]
+
+# Totales poblacionales conocidos por departamento, a los que se calibran
+# los factores de expansión (posestratificación simple)
+poblacion_objetivo:
+  Antioquia: 90000
+  Bogota: 110000
+  Narino: 35000
+  Santander: 55000
+  Valle: 70000

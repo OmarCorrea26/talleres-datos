@@ -1,0 +1,21 @@
+# Entornos y caches de Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Salidas generadas por herramientas/empaquetar.py
+dist/
+
+# Archivos de trabajo locales
+*.xlsx
+!**/material/**/*.xlsx
+datos_ejemplo.csv
+salida/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Instalaciones editables
+*.egg-info/

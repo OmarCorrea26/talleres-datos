@@ -1,0 +1,4 @@
+titulo = "Taller 4. Arquitectura de software para procesos estadísticos"
+subtitulo = "Separar las reglas de lo que las rodea, para que el mismo proceso sirva por HTTP, por Kedro y por terminal sin reescribirlo. Guía completa, módulos 0 a 5"
+fecha = "Noviembre de 2026"
+nombre_archivo = "Taller_4_Arquitectura"

@@ -1,0 +1,39 @@
+# .gitignore para proyectos Python del taller
+# Copia este archivo a la raiz de tu proyecto, con el nombre exacto: .gitignore
+# (con el punto al inicio, sin extension)
+
+# ----- Entorno virtual -----
+# Nunca se sube. Cada quien crea el suyo con "python -m venv .venv"
+.venv/
+venv/
+env/
+
+# ----- Cache de Python -----
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# ----- Archivos generados por Jupyter -----
+.ipynb_checkpoints/
+
+# ----- Archivos de datos generados localmente -----
+# (los regeneras con generar_datos.py cuando los necesites)
+datos_ejemplo.csv
+resumen.xlsx
+resumen_extendido.xlsx
+
+# ----- Configuracion de editores -----
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ----- Sistema operativo -----
+Thumbs.db
+.DS_Store
+
+# ----- Variables de entorno y secretos -----
+.env
+*.key
+secrets.json
